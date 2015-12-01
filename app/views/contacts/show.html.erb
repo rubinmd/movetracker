@@ -1,0 +1,41 @@
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+<div class="page-header">
+  <h3><%= @contact.name %></h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <dl class="dl-horizontal">
+
+      <dt>Has your</dt>
+      <dd>
+      <% @contact_methods=[] %>
+      <% if @contact.has_phone == true%>
+        <% @contact_methods.push("phone") %>
+      <% end %>
+      <% if @contact.has_email == true%>
+      <% @contact_methods.push("email") %>
+      <% end %>
+      <% if @contact.has_address == true%>
+      <% @contact_methods.push("address") %>
+      <% end %>
+      <%= @contact_methods.to_sentence.capitalize %>
+      </dd>
+      <dt>Notes</dt>
+      <dd><%= @contact.notes %></dd>
+    </dl>
+
+    <div class="btn-group btn-group-justified">
+      <a href="/contacts" class="btn btn-primary">
+        <i class="fa fa-chevron-left"></i>
+      </a>
+      <a href="/contacts/<%= @contact.id %>/edit" class="btn btn-warning">
+        <i class="fa fa-pencil-square-o"></i>
+      </a>
+      <a href="/delete_contact/<%= @contact.id %>" class="btn btn-danger" rel="nofollow">
+        <i class="fa fa-trash-o"></i>
+      </a>
+    </div>
+  </div>
+</div>

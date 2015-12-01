@@ -1,0 +1,79 @@
+<!-- Validation failure messages -->
+<% if @move.errors.any? %>
+  <% @move.errors.full_messages.each do |message| %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<div class="row">
+  <div class="col-md-10 col-md-offset-1">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">What's changed?</h3>
+      </div>
+      <div class="panel-body">
+        <form action="/create_move" method="post">
+        <!-- Hidden input for authenticity token to protect from forgery -->
+        <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+        <!-- Input for user_id -->
+
+        <input type="hidden" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= current_user.id %>">
+
+        <!-- Label and input for move_name -->
+        <div class="form-group">
+          <label for="name" class="control-label">
+            Give your move a name:
+          </label>
+
+          <input type="text" id="name" name="name" placeholder="New phone, move downtown, etc." class="form-control" value="<%= @move.name %>">
+        </div>
+
+          <div class="form-group">
+          <label for="notes" class="control-label">
+            Add a description (optional):
+          </label>
+
+          <textarea id="notes" name="notes" placeholder="Complete this week, call the bank first, etc." class="form-control" value="<%= @move.notes %>"></textarea>
+        </div>
+
+        <label>I'm changing my:</label>
+        <!-- Label and input for move_phone -->
+        <div class="checkbox">
+          <label for="updated_phone">
+            <input type="checkbox" id="updated_phone" name="updated_phone" value="1" <%= "checked" if @move.updated_phone %>>
+            Phone number
+          </label>
+        </div>
+
+        <!-- Label and input for move_email -->
+        <div class="checkbox">
+          <label for="updated_email">
+            <input type="checkbox" id="updated_email" name="updated_email" value="1" <%= "checked" if @move.updated_email %>>
+            Email address
+          </label>
+        </div>
+
+        <!-- Label and input for move_address -->
+        <div class="checkbox">
+          <label for="updated_address">
+            <input type="checkbox" id="updated_address" name="updated_address" value="1" <%= "checked" if @move.updated_address %>>
+            Mailing address
+          </label>
+        </div>
+
+
+
+          <button class="btn btn-success">
+          Create Move
+          </button>
+          or
+          <a href="/moves">Cancel</a>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

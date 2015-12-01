@@ -1,0 +1,70 @@
+<!-- Validation failure messages -->
+<% if @stale_listing.errors.any? %>
+  <% @stale_listing.errors.full_messages.each do |message| %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<div class="page-header">
+  <h3>Add Stale Listing</h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <form action="/create_stale_listing" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for out_of_date_address -->
+      <div class="checkbox">
+        <label for="out_of_date_address">
+          <input type="checkbox" id="out_of_date_address" name="out_of_date_address" value="1" <%= "checked" if @stale_listing.out_of_date_address %>>
+          Out of date address
+        </label>
+      </div>
+
+      <!-- Label and input for out_of_date_email -->
+      <div class="checkbox">
+        <label for="out_of_date_email">
+          <input type="checkbox" id="out_of_date_email" name="out_of_date_email" value="1" <%= "checked" if @stale_listing.out_of_date_email %>>
+          Out of date email
+        </label>
+      </div>
+
+      <!-- Label and input for out_of_date_phone -->
+      <div class="checkbox">
+        <label for="out_of_date_phone">
+          <input type="checkbox" id="out_of_date_phone" name="out_of_date_phone" value="1" <%= "checked" if @stale_listing.out_of_date_phone %>>
+          Out of date phone
+        </label>
+      </div>
+
+      <!-- Label and input for move_id -->
+      <div class="form-group">
+        <label for="move_id" class="control-label">
+          Move
+        </label>
+
+        <input type="text" id="move_id" name="move_id" placeholder="Move" class="form-control" value="<%= @stale_listing.move_id %>">
+      </div>
+
+      <!-- Label and input for contact_id -->
+      <div class="form-group">
+        <label for="contact_id" class="control-label">
+          Contact
+        </label>
+
+        <input type="text" id="contact_id" name="contact_id" placeholder="Contact" class="form-control" value="<%= @stale_listing.contact_id %>">
+      </div>
+
+      <button class="btn btn-success">
+        Create Stale Listing
+      </button>
+      or
+      <a href="/stale_listings">Cancel</a>
+    </form>
+  </div>
+</div>

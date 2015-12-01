@@ -1,0 +1,37 @@
+<div class="page-header">
+  <h3>Stale Listing #<%= @stale_listing.id %></h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <dl class="dl-horizontal">
+      <dt>Out of date address</dt>
+      <dd><%= @stale_listing.out_of_date_address %></dd>
+
+      <dt>Out of date email</dt>
+      <dd><%= @stale_listing.out_of_date_email %></dd>
+
+      <dt>Out of date phone</dt>
+      <dd><%= @stale_listing.out_of_date_phone %></dd>
+
+      <dt>Move</dt>
+      <dd><%= @stale_listing.move_id %></dd>
+
+      <dt>Contact</dt>
+      <dd><%= @stale_listing.contact_id %></dd>
+
+    </dl>
+
+    <div class="btn-group btn-group-justified">
+      <a href="/stale_listings" class="btn btn-primary">
+        Back
+      </a>
+      <a href="/stale_listings/<%= @stale_listing.id %>/edit" class="btn btn-warning">
+        Edit
+      </a>
+      <a href="/delete_stale_listing/<%= @stale_listing.id %>" class="btn btn-danger" rel="nofollow">
+        Delete
+      </a>
+    </div>
+  </div>
+</div>

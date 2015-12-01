@@ -1,0 +1,40 @@
+<div class="page-header">
+  <h1>
+    Stale listings
+    <a href="/stale_listings/new" class="btn btn-lg btn-success">New Stale listing</a>
+  </h1>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-striped table-hover">
+      <tr>
+        <th>Contact</th>
+        <th>Move</th>
+        <th>Out of date address</th>
+        <th>Out of date email</th>
+        <th>Out of date phone</th>
+
+
+        <th>Actions</th>
+      </tr>
+
+      <% @stale_listings.each do |stale_listing| %>
+      <tr>
+        <td><%= stale_listing.contact.name %></td>
+        <td><%= stale_listing.move.name %></td>
+        <td><%= stale_listing.out_of_date_address %></td>
+        <td><%= stale_listing.out_of_date_email %></td>
+        <td><%= stale_listing.out_of_date_phone %></td>
+
+
+        <td>
+          <a href="/stale_listings/<%= stale_listing.id %>" class="btn btn-primary">Show</a>
+          <a href="/stale_listings/<%= stale_listing.id %>/edit" class="btn btn-warning">Edit</a>
+          <a href="/delete_stale_listing/<%= stale_listing.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>

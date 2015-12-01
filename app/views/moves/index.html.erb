@@ -1,0 +1,50 @@
+<div class="page-header">
+  <h1>
+    Your moves
+    <a href="/moves/new" class="btn btn-md btn-success">Add</a>
+  </h1>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-striped table-hover">
+      <tr>
+        <th>Name</th>
+        <th>Notes</th>
+        <th class="text-center">New phone</th>
+        <th class="text-center">New email</th>
+        <th class="text-center">New address</th>
+
+        <th class="text-center">Actions</th>
+      </tr>
+
+      <% @moves.each do |move| %>
+      <tr>
+        <td><a href="/moves/<%= move.id %>"><%= move.name %></a></td>
+        <td><%= truncate(move.notes, :length => 50) %></td>
+        <td class="text-center">
+        <% if move.updated_phone == true %>
+          <font color="green"><i class="fa fa-check"></i></font>
+        <% end %>
+        </td>
+        <td class="text-center">
+        <% if move.updated_email == true %>
+          <font color="green"><i class="fa fa-check"></i></font>
+        <% end %>
+        </td>
+        <td class="text-center">
+        <% if move.updated_address == true %>
+          <font color="green"><i class="fa fa-check"></i></font>
+        <% end %>
+        </td>
+
+        <td class="text-center">
+          <a href="/moves/<%= move.id %>" class="btn btn-primary"><i class="fa fa-fw fa-plus-square-o"></i></a>
+          <a href="/moves/<%= move.id %>/edit" class="btn btn-warning"><i class="fa fa-fw fa-pencil-square-o"></i></a>
+          <a href="/delete_move/<%= move.id %>" class="btn btn-danger" rel="nofollow"><i class="fa fa-fw fa-trash-o"></i></a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
