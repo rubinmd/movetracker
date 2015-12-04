@@ -66,7 +66,8 @@ Rails.application.routes.draw do
   # DELETE
   get "/delete_contact/:id", :controller => "contacts", :action => "destroy"
   #------------------------------
-
+  # Dashboard page
+  get "/dashboard", :controller => "dashboard", :action => "index"
   devise_for :users
   root 'contacts#index'
   # The priority is based upon order of creation: first created -> highest priority.
