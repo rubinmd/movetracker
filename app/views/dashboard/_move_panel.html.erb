@@ -1,0 +1,35 @@
+<div class="panel panel-default">
+          <!-- Default panel contents -->
+          <div class="panel-heading">Your Moves</div>
+          <div class="panel-body">
+            <p>Changing your address, phone, or email? Create a new move to generate a to-do list of contacts to notify with your change!</p>
+          </div>
+
+          <!-- List group -->
+          <div class="list-group scrollable-panel">
+            <a class="list-group-item" href="/moves/new">
+              <span class="label label-info">New Move</span>
+            </a>
+
+            <% @moves.each do |move| %>
+            <% contact_methods= [] %>
+
+            <a class="list-group-item" href="moves/<%= move.id %>"><%= move.name %>
+              <span class="badge"><%= move.contacts.count %></span>
+              <small> -
+                <% if move.updated_address %>
+                <% contact_methods.push("address")  %>
+                <% end %>
+                <% if move.updated_phone %>
+                <% contact_methods.push("phone")  %>
+                <% end %>
+                <% if move.updated_email %>
+                <% contact_methods.push("email")  %>
+                <% end %>
+                <%= contact_methods.to_sentence.capitalize %>
+              </small>
+            </a>
+
+            <% end %>
+          </div>
+        </div>

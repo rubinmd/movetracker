@@ -1,0 +1,33 @@
+        <div class="panel panel-default">
+          <!-- Default panel contents -->
+          <div class="panel-heading">All Contacts </div>
+          <div class="panel-body">
+            <p>These are popular contacts added that other people like. Feel free to browse and add them to your personal contact list</p>
+          </div>
+
+          <!-- List group -->
+          <div class="list-group">
+
+            <% @contacts.each do |contact| %>
+            <% contact_methods= [] %>
+            <a class="list-group-item" href="contacts/<%= contact.id %>">
+            <span class="badge list-group-item-success pull-left"><i class="fa fa-plus"></i></span>
+            &nbsp; <%= contact.name %>
+              <small>-
+                <% if contact.has_address %>
+                <% contact_methods.push("address")  %>
+                <% end %>
+                <% if contact.has_phone %>
+                <% contact_methods.push("phone")  %>
+                <% end %>
+                <% if contact.has_email %>
+                <% contact_methods.push("email")  %>
+                <% end %>
+                <%= contact_methods.to_sentence.capitalize %>
+              </small>
+            </a>
+
+            <% end %>
+
+          </div>
+        </div>
