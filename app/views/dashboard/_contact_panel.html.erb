@@ -11,7 +11,7 @@
             <a class="list-group-item" href="/contacts/new">
               <span class="label label-success">New Contact</span>
             </a>
-            <% @contacts.each do |contact| %>
+            <% @my_contacts.each do |contact| %>
             <% contact_methods= [] %>
             <a class="list-group-item" href="contacts/<%= contact.id %>"><%= contact.name %>
               <small>-

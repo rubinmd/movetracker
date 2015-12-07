@@ -1,6 +1,6 @@
 class MovesController < ApplicationController
   def index
-    @moves = Move.all
+    @moves = current_user.moves
   end
 
   def show
