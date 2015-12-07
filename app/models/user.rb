@@ -6,5 +6,4 @@ class User < ActiveRecord::Base
   validates :email, :presence=>true
   has_many :moves
   has_many :contacts
-  has_many :notes
 end

@@ -5,7 +5,6 @@ class ContactsController < ApplicationController
 
   def show
     @contact = Contact.find(params[:id])
-    @notes = Note.where({:user_id=>current_user.id, :contact_id=>@contact.id})[0].content
   end
 
   def new
@@ -15,7 +14,7 @@ class ContactsController < ApplicationController
   def create
     @contact = Contact.new
     @contact.user_id = params[:user_id]
-    @note_text = params[:notes]
+    @contact.notes = params[:notes]
     @contact.has_phone = params[:has_phone]
     @contact.has_email = params[:has_email]
     @contact.has_address = params[:has_address]
@@ -25,13 +24,7 @@ class ContactsController < ApplicationController
     if @contact.save
       redirect_to "/contacts", :notice => "Contact created successfully."
 
-      n=Note.new
-      n.user_id=current_user.id
-      n.contact_id=@contact.id
-      n.content=@note_text
-      n.save
 
-      #fix this later
       if @exclude == "1"
         puts "huh?"
 
@@ -70,7 +63,6 @@ class ContactsController < ApplicationController
 
   def edit
     @contact = Contact.find(params[:id])
-    @notes = Note.where({:user_id=>current_user.id, :contact_id=>@contact.id})[0].content
   end
 
   def update
@@ -79,7 +71,7 @@ class ContactsController < ApplicationController
     @previously_had_phone=@contact.has_phone
     @previously_had_email=@contact.has_email
     @contact.user_id = params[:user_id]
-    @notes = params[:notes]
+    @contact.notes = params[:notes]
     @contact.has_phone = params[:has_phone]
     @contact.has_email = params[:has_email]
     @contact.has_address = params[:has_address]
@@ -89,11 +81,6 @@ class ContactsController < ApplicationController
 
     #Step 1: Add new stale listings when a new contact method is added
     if @contact.save
-
-      n = Note.where({:user_id=>current_user.id, :contact_id=>@contact.id})[0]
-      n.content=@notes
-      n.save
-
       Move.all.each do |move|
         if @previously_had_email==nil && @contact.has_email == true && move.updated_email == true
           sl=StaleListing.new
@@ -142,9 +129,8 @@ class ContactsController < ApplicationController
 
   def destroy
     @contact = Contact.find(params[:id])
+
     @contact.destroy
-    @note = Note.where({:user_id=>current_user.id, :contact_id=>@contact.id})[0]
-    @note.destroy
 
     redirect_to "/contacts", :notice => "Contact deleted."
   end
