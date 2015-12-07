@@ -22,7 +22,7 @@ class ContactsController < ApplicationController
     @exclude=params[:exclude]
 
     if @contact.save
-      redirect_to "/contacts", :notice => "Contact created successfully."
+      redirect_to "/dashboard", :notice => "Contact created successfully."
 
 
       if @exclude == "1"

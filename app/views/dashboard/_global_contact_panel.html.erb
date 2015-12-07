@@ -6,31 +6,43 @@
           </div>
 
           <!-- List group -->
-          <div class="list-group">
+          <table class="table table-hover">
 
             <% @all_contacts.each do |contact| %>
             <% contact_methods= [] %>
-            <a class="list-group-item" href="contacts/<%= contact.id %>">
-            <span class="badge list-group-item-success pull-left"><i class="fa fa-plus"></i></span>
-            &nbsp; <%= contact.name %>
-              <small>-
-                <% if contact.has_address %>
-                  <% contact_methods.push("address")  %>
+            <tr>
+              <form action="/create_contact" method="post">
+                <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+                <input name="name" type="hidden" value="<%= contact.name %>">
+                <input name="user_id" type="hidden" value="<%= current_user.id %>">
+                <td width="1%">
+                  <button class="badge list-group-item-success pull-left btn btn-link">
+                    <i class="fa fa-plus"></i>
+                  </button>
+                </td>
+                <td>
+                  <%= contact.name %>
+                </td>
+                <td>
+
+
+                    <label for="has_email"><i class="fa fa-at"></i></label>
+                    <%= check_box_tag(:has_email) %>
+
+
+                    <label for="has_phone"><i class="fa fa-hashtag"></i></label>
+                    <%= check_box_tag(:has_phone) %>
+
+
+                    <label for="has_address"><i class="fa fa-car"></i></label>
+                    <%= check_box_tag(:has_address) %>
+
+
+                </td>
+
+
+
                 <% end %>
-                <% if contact.has_phone %>
-                  <% contact_methods.push("phone")  %>
-                <% end %>
-                <% if contact.has_email %>
-                  <% contact_methods.push("email")  %>
-                <% end %>
-                <%= contact_methods.to_sentence.capitalize %>
-              </small>
-
-            </a>
-
-
-
-            <% end %>
-
-          </div>
-        </div>
+              </form>
+            </tr>
+          </table>
