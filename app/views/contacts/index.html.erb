@@ -46,7 +46,7 @@
           <tr>
             <td><a href="/contacts/<%= contact.id %>"><%= contact.name %></a></td>
             <td>
-              <%= truncate(contact.notes, :length => 75) %>
+              <%= truncate(contact.notes.where({:user_id=>current_user.id,:contact_id=>contact.id })[0].content, :length => 75) %>
             </td>
             <td class="text-center">
               <% if contact.has_phone == true %>

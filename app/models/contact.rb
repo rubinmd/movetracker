@@ -2,6 +2,7 @@ class Contact < ActiveRecord::Base
   has_many :moves, :through => :stale_listings , :source => :moves
   belongs_to :user
   has_many :stale_listings , :class_name => "StaleListing", :foreign_key => "contact_id", dependent: :destroy, foreign_key: :contact_id
+  has_many :notes
   validates :name, :presence=>true
 
   validate :move_type
