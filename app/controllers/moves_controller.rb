@@ -20,7 +20,7 @@ class MovesController < ApplicationController
     @move.updated_address = params[:updated_address]
     @move.name = params[:name]
     if @move.save
-      redirect_to "/moves", :notice => "Move created successfully."
+      redirect_to "/dashboard", :notice => "Move created successfully."
 
     @contacts = Contact.all
     @contacts.each do |contact|

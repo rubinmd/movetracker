@@ -1,31 +1,31 @@
 
 
+
+
 <div class="row">
-  <div class="col-md-8 col-md-offset-2">
+  <div class="col-md-10 col-md-offset-1">
 
-    <h3><%= @move.name %></h3>
-  </div>
-</div>
-<div class="row">
-  <div class="col-md-8 col-md-offset-2">
-     <a href="/moves" class="btn btn-xs btn-primary">
-      Back
-    </a>
-    <a href="/moves/<%= @move.id %>/edit" class="btn btn-xs btn-warning">
-      Edit
-    </a>
-    <a href="/delete_move/<%= @move.id %>" class="btn btn-xs btn-danger" rel="nofollow">
-      Delete
-    </a>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <span class="h3">
+        <span class="text-left">
+        <%= @move.name %>
+        </span>
+        <span class="pull-right">
 
-  </div>
-</div>
+        <a href="/moves" class="btn btn-xs btn-primary">
+          Back
+        </a>
 
-  </div><br>
-  <div class="row">
-    <div class="col-md-8 col-md-offset-2">
-
-
+        <a href="/moves/<%= @move.id %>/edit" class="btn btn-xs btn-warning">
+          Edit
+        </a>
+        <a href="/delete_move/<%= @move.id %>" class="btn btn-xs btn-danger" rel="nofollow">
+          Delete
+        </a>
+        </span>
+        </span>
+      </div>
 
       <table class="table table-striped">
         <tr>
@@ -80,7 +80,86 @@
 
       </table>
     </div>
+
+
+    <h3><%= @move.name %></h3>
   </div>
+</div>
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+   <a href="/moves" class="btn btn-xs btn-primary">
+    Back
+  </a>
+  <a href="/moves/<%= @move.id %>/edit" class="btn btn-xs btn-warning">
+    Edit
+  </a>
+  <a href="/delete_move/<%= @move.id %>" class="btn btn-xs btn-danger" rel="nofollow">
+    Delete
+  </a>
+
+</div>
+</div>
+
+</div><br>
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+
+
+
+    <table class="table table-striped">
+      <tr>
+        <th>Contact Name</th>
+
+        <th>Updated address?</th>
+
+        <th>Updated phone?</th>
+
+        <th>Updated email?</th>
+
+      </tr>
+      <tr>
+        <% @contacts=@move.contacts.uniq %>
+        <% @contacts.each do |contact| %>
+        <td><a href="/contacts/<%= contact.id %>"><%= contact.name %></a>
+        </td>
+
+        <td>
+          <% if @move.stale_listings.find_by({:contact_id=>contact.id, :out_of_date_address=>true})!=nil %>
+          <form action="/delete_stale_listing/<%= @move.stale_listings.find_by({:contact_id=>contact.id, :out_of_date_address=>true}).id %>" method="get">
+            <input name="authenticity_token" type="hidden" value="token_value">
+            <input type="hidden" name="out_of_date_address" value="false">
+            <button class="btn btn-link"><i class="fa fa-square-o"></i></button>
+          </form>
+          <% end %>
+        </td>
+
+        <td>
+          <% if @move.stale_listings.find_by({:contact_id=>contact.id, :out_of_date_phone=>true})!=nil %>
+          <form action="/delete_stale_listing/<%= @move.stale_listings.find_by({:contact_id=>contact.id, :out_of_date_phone=>true}).id %>" method="get">
+            <input name="authenticity_token" type="hidden" value="token_value">
+            <input type="hidden" name="out_of_date_phone" value="false">
+            <button class="btn btn-link"><i class="fa fa-square-o"></i></button>
+          </form>
+          <% end %>
+        </td>
+
+
+        <td>
+
+          <% if @move.stale_listings.find_by({:contact_id=>contact.id, :out_of_date_email=>true})!=nil %>
+          <form action="/delete_stale_listing/<%= @move.stale_listings.find_by({:contact_id=>contact.id, :out_of_date_email=>true}).id %>" method="get">
+            <input name="authenticity_token" type="hidden" value="token_value">
+            <input type="hidden" name="out_of_date_email" value="false">
+            <button class="btn btn-link"><i class="fa fa-square-o"></i></button>
+          </form>
+          <% end %>
+        </td>
+      </tr>
+      <% end %>
+
+    </table>
+  </div>
+</div>
 
 
 

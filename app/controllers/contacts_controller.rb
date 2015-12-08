@@ -121,7 +121,7 @@ class ContactsController < ApplicationController
     end
 
 
-      redirect_to "/contacts", :notice => "Contact updated successfully."
+      redirect_to "/dashboard", :notice => "Contact updated successfully."
     else
       render 'edit'
     end
@@ -132,6 +132,6 @@ class ContactsController < ApplicationController
 
     @contact.destroy
 
-    redirect_to "/contacts", :notice => "Contact deleted."
+    redirect_to "/dashboard", :notice => "Contact deleted."
   end
 end

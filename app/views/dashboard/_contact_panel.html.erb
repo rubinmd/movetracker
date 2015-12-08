@@ -1,7 +1,7 @@
 
         <div class="panel panel-default">
           <!-- Default panel contents -->
-          <div class="panel-heading">Your Contacts </div>
+          <div class="panel-heading">Your Contacts - (<%= current_user.contacts.count %>)</div>
           <div class="panel-body ">
             <p>These are all the people or companies that have your contact information. Add as many as you'd like.</p>
           </div>
@@ -13,7 +13,7 @@
             </a>
             <% @my_contacts.each do |contact| %>
             <% contact_methods= [] %>
-            <a class="list-group-item" href="contacts/<%= contact.id %>"><%= contact.name %>
+            <a class="list-group-item" href="contacts/<%= contact.id %>/edit"><%= contact.name %>
               <small>-
                 <% if contact.has_address %>
                 <% contact_methods.push("address")  %>

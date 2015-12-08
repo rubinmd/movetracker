@@ -69,7 +69,7 @@ Rails.application.routes.draw do
   # Dashboard page
   get "/dashboard", :controller => "dashboard", :action => "index"
   devise_for :users
-  root 'contacts#index'
+  root 'dashboard#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

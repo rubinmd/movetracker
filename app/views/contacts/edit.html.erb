@@ -1,26 +1,25 @@
 <!-- Validation failure messages -->
 <% if @contact.errors.any? %>
-  <% @contact.errors.full_messages.each do |message| %>
-    <div class="alert alert-dismissable alert-danger">
-      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-      <%= message %>
-    </div>
-  <% end %>
-<% end %>
-<div class="row">
-  <div class="col-md-8 col-md-offset-2">
-<div class="page-header">
-  <h3>Edit Contact</h3>
+<% @contact.errors.full_messages.each do |message| %>
+<div class="alert alert-dismissable alert-danger">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+  <%= message %>
 </div>
+<% end %>
+<% end %>
 
-
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Edit Contact: <%= @contact.name %></h3>
+  </div>
+  <div class="panel-body">
     <form action="/update_contact/<%= @contact.id %>" method="post">
       <!-- Hidden input for authenticity token to protect from forgery -->
       <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
 
       <!-- Input for user_id -->
 
-        <input type="hidden" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= @contact.user_id %>">
+      <input type="hidden" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= @contact.user_id %>">
 
       <!-- Label and input for business_name -->
       <div class="form-group">
@@ -69,7 +68,12 @@
         Update Contact
       </button>
       or
-      <a href="/contacts/<%= @contact.id %>">Cancel</a>
+      <a href="/dashboard">Cancel</a>
     </form>
   </div>
 </div>
+
+
+
+
+

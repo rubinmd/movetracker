@@ -51,6 +51,6 @@ class StaleListingsController < ApplicationController
 
     @stale_listing.destroy
 
-    redirect_to :back, :notice => "Stale listing deleted."
+    redirect_to :back, :notice => "Checklist updated"
   end
 end

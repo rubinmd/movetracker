@@ -5,23 +5,8 @@
             <p>These are popular contacts from other users. Feel free to browse and add them to your personal contact list</p>
           </div>
 
-          <!-- List group -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-          <!-- List group -->
-          <table class="table table-hover">
+          <!-- rows -->
+          <table class="table table-hover scrollable-panel">
 
             <% @all_contacts.each do |contact| %>
             <% contact_methods= [] %>
@@ -51,7 +36,7 @@
                     <input name="has_phone" id="has_phone<%= contact.id %>" form="form<%= contact.id %>" type="checkbox">
 
 
-                    <label for="has_address<%= contact.id %>"><i class="fa fa-car"></i></label>
+                    <label for="has_address<%= contact.id %>"><i class="fa fa-home"></i></label>
                     <input name="has_address" id="has_address<%= contact.id %>" form="form<%= contact.id %>" type="checkbox">
 
 
