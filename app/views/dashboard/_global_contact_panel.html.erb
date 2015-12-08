@@ -6,17 +6,33 @@
           </div>
 
           <!-- List group -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          <!-- List group -->
           <table class="table table-hover">
 
             <% @all_contacts.each do |contact| %>
             <% contact_methods= [] %>
+            <form action="/create_contact" method="post" id="form<%= contact.id %>">
             <tr>
-              <form action="/create_contact" method="post">
-                <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
-                <input name="name" type="hidden" value="<%= contact.name %>">
-                <input name="user_id" type="hidden" value="<%= current_user.id %>">
+
+                <input form="form<%= contact.id %>" name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+                <input form="form<%= contact.id %>" name="name" type="hidden" value="<%= contact.name %>">
+                <input form="form<%= contact.id %>" name="user_id" type="hidden" value="<%= current_user.id %>">
                 <td width="1%">
-                  <button class="badge list-group-item-success pull-left btn btn-link">
+                  <button form="form<%= contact.id %>" class="badge list-group-item-success pull-left btn btn-link">
                     <i class="fa fa-plus"></i>
                   </button>
                 </td>
@@ -26,23 +42,26 @@
                 <td>
 
 
-                    <label for="has_email"><i class="fa fa-at"></i></label>
-                    <%= check_box_tag(:has_email) %>
+                    <label for="has_email<%= contact.id %>"><i class="fa fa-at"></i></label>
+                    <input name="has_email" id="has_email<%= contact.id %>" form="form<%= contact.id %>" type="checkbox">
 
 
-                    <label for="has_phone"><i class="fa fa-hashtag"></i></label>
-                    <%= check_box_tag(:has_phone) %>
+
+                    <label for="has_phone<%= contact.id %>"><i class="fa fa-hashtag"></i></label>
+                    <input name="has_phone" id="has_phone<%= contact.id %>" form="form<%= contact.id %>" type="checkbox">
 
 
-                    <label for="has_address"><i class="fa fa-car"></i></label>
-                    <%= check_box_tag(:has_address) %>
+                    <label for="has_address<%= contact.id %>"><i class="fa fa-car"></i></label>
+                    <input name="has_address" id="has_address<%= contact.id %>" form="form<%= contact.id %>" type="checkbox">
+
 
 
                 </td>
 
 
 
-                <% end %>
+
               </form>
             </tr>
+            <% end %>
           </table>
