@@ -8,71 +8,75 @@
 <% end %>
 <% end %>
 
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h3 class="panel-title">Edit Contact: <%= @contact.name %></h3>
-  </div>
-  <div class="panel-body">
-    <form action="/update_contact/<%= @contact.id %>" method="post">
-      <!-- Hidden input for authenticity token to protect from forgery -->
-      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
 
-      <!-- Input for user_id -->
-
-      <input type="hidden" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= @contact.user_id %>">
-
-      <!-- Label and input for business_name -->
-      <div class="form-group">
-        <label for="business_name" class="control-label">
-          Business name
-        </label>
-
-        <input type="text" id="name" name="name" placeholder="Name" class="form-control" value="<%= @contact.name %>">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Edit Contact: <%= @contact.name %></h3>
       </div>
+      <div class="panel-body">
+        <form action="/update_contact/<%= @contact.id %>" method="post">
+          <!-- Hidden input for authenticity token to protect from forgery -->
+          <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
 
-      <!-- Label and input for notes -->
-      <div class="form-group">
-        <label for="notes" class="control-label">
-          Notes
-        </label>
+          <!-- Input for user_id -->
 
-        <textarea id="notes" name="notes" placeholder="Notes" class="form-control" rows="3"><%= @contact.notes %></textarea>
+          <input type="hidden" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= @contact.user_id %>">
+
+          <!-- Label and input for business_name -->
+          <div class="form-group">
+            <label for="business_name" class="control-label">
+              Business name
+            </label>
+
+            <input type="text" id="name" name="name" placeholder="Name" class="form-control" value="<%= @contact.name %>">
+          </div>
+
+          <!-- Label and input for notes -->
+          <div class="form-group">
+            <label for="notes" class="control-label">
+              Notes
+            </label>
+
+            <textarea id="notes" name="notes" placeholder="Notes" class="form-control" rows="3"><%= @contact.notes %></textarea>
+          </div>
+
+          <!-- Label and input for has_phone -->
+          <div class="checkbox">
+            <label for="has_phone">
+              <input type="checkbox" id="has_phone" name="has_phone" value="1" <%= "checked" if @contact.has_phone %>>
+              Has phone
+            </label>
+          </div>
+
+          <!-- Label and input for has_email -->
+          <div class="checkbox">
+            <label for="has_email">
+              <input type="checkbox" id="has_email" name="has_email" value="1" <%= "checked" if @contact.has_email %>>
+              Has email
+            </label>
+          </div>
+
+          <!-- Label and input for has_address -->
+          <div class="checkbox">
+            <label for="has_address">
+              <input type="checkbox" id="has_address" name="has_address" value="1" <%= "checked" if @contact.has_address %>>
+              Has address
+            </label>
+          </div>
+
+
+          <button class="btn btn-warning">
+            Update Contact
+          </button>
+          or
+          <a href="/dashboard">Cancel</a>
+        </form>
       </div>
-
-      <!-- Label and input for has_phone -->
-      <div class="checkbox">
-        <label for="has_phone">
-          <input type="checkbox" id="has_phone" name="has_phone" value="1" <%= "checked" if @contact.has_phone %>>
-          Has phone
-        </label>
-      </div>
-
-      <!-- Label and input for has_email -->
-      <div class="checkbox">
-        <label for="has_email">
-          <input type="checkbox" id="has_email" name="has_email" value="1" <%= "checked" if @contact.has_email %>>
-          Has email
-        </label>
-      </div>
-
-      <!-- Label and input for has_address -->
-      <div class="checkbox">
-        <label for="has_address">
-          <input type="checkbox" id="has_address" name="has_address" value="1" <%= "checked" if @contact.has_address %>>
-          Has address
-        </label>
-      </div>
-
-
-      <button class="btn btn-warning">
-        Update Contact
-      </button>
-      or
-      <a href="/dashboard">Cancel</a>
-    </form>
+    </div>
   </div>
 </div>
-
 
 
 

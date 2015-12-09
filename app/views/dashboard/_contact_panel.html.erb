@@ -14,7 +14,7 @@
             <% @my_contacts.each do |contact| %>
             <% contact_methods= [] %>
             <a class="list-group-item" href="contacts/<%= contact.id %>/edit"><%= contact.name %>
-              <small>-
+              <small class="text-muted">-
                 <% if contact.has_address %>
                 <% contact_methods.push("address")  %>
                 <% end %>

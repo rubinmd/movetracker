@@ -5,6 +5,17 @@ class MovesController < ApplicationController
 
   def show
     @move = Move.find(params[:id])
+    @move_number=0
+    if @move.updated_address==true
+      @move_number=@move_number+1
+    end
+    if @move.updated_phone==true
+      @move_number=@move_number+1
+    end
+    if @move.updated_email==true
+      @move_number=@move_number+1
+    end
+
   end
 
   def new
@@ -22,7 +33,7 @@ class MovesController < ApplicationController
     if @move.save
       redirect_to "/dashboard", :notice => "Move created successfully."
 
-    @contacts = Contact.all
+    @contacts = current_user.contacts
     @contacts.each do |contact|
       if @move.updated_phone == true && contact.has_phone == true
         @sl=StaleListing.new
@@ -84,7 +95,7 @@ class MovesController < ApplicationController
       end
 
       #Step 2: Add new stale_listings that now apply
-      Contact.all.each do |contact|
+      current_user.contacts.each do |contact|
         if @previously_had_phone == nil && @move.updated_phone == true && contact.has_phone == true
           @sl=StaleListing.new
           @sl.out_of_date_phone=true
@@ -109,7 +120,7 @@ class MovesController < ApplicationController
       end
 
 
-      redirect_to "/moves", :notice => "Move updated successfully."
+      redirect_to "/moves/"+@move.id.to_s, :notice => "Move updated successfully."
     else
       render 'edit'
     end
@@ -120,6 +131,6 @@ class MovesController < ApplicationController
 
     @move.destroy
 
-    redirect_to "/moves", :notice => "Move deleted."
+    redirect_to "/dashboard", :notice => "Move deleted."
   end
 end

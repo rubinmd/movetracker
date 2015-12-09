@@ -1,99 +1,101 @@
 <!-- Validation failure messages -->
 <% if @contact.errors.any? %>
-  <% @contact.errors.full_messages.each do |message| %>
-    <div class="alert alert-dismissable alert-danger">
-      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-      <%= message %>
-    </div>
-  <% end %>
+<% @contact.errors.full_messages.each do |message| %>
+<div class="alert alert-dismissable alert-danger">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+  <%= message %>
+</div>
+<% end %>
 <% end %>
 
-<div class="page-header">
-  <h3>Add Contact</h3>
-</div>
-
 <div class="row">
-  <div class="col-md-12">
-    <form action="/create_contact" method="post">
-      <!-- Hidden input for authenticity token to protect from forgery -->
-      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
-      <!-- Label for user_id -->
-
-      <input type="hidden" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= current_user.id %>">
-
-
-      <!-- Label and input for business_name -->
-      <div class="form-group">
-        <label for="business_name" class="control-label">
-          Name
-        </label>
-
-        <input type="text" id="name" name="name" placeholder="Name" class="form-control" value="<%= @contact.name %>">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Add a new contact</h3>
       </div>
+      <div class="panel-body">
+        <form action="/create_contact" method="post">
+          <!-- Hidden input for authenticity token to protect from forgery -->
+          <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+          <!-- Label for user_id -->
+          <input type="hidden" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= current_user.id %>">
 
-      <!-- Label and input for notes -->
-      <div class="form-group">
-        <label for="notes" class="control-label">
-          Notes
-        </label>
+          <!-- Label and input for business_name -->
+          <div class="form-group">
+            <label for="business_name" class="control-label">
+              Name
+            </label>
 
-        <textarea id="notes" name="notes" placeholder="Notes" class="form-control" rows="3"><%= @contact.notes %></textarea>
+            <input type="text" id="name" name="name" placeholder="Name" class="form-control" value="<%= @contact.name %>">
+          </div>
+
+          <!-- Label and input for notes -->
+          <div class="form-group">
+            <label for="notes" class="control-label">
+              Notes
+            </label>
+
+            <textarea id="notes" name="notes" placeholder="Notes" class="form-control" rows="3"><%= @contact.notes %></textarea>
+          </div>
+
+          <label>This contact has my:</label>
+
+          <!-- Label and input for has_address -->
+          <div class="checkbox">
+            <label for="has_address">
+              <input type="checkbox" id="has_address" name="has_address" value="1" <%= "checked" if @contact.has_address %>>
+              Mailing address
+            </label>
+          </div>
+
+
+          <!-- Label and input for has_phone -->
+          <div class="checkbox">
+            <label for="has_phone">
+              <input type="checkbox" id="has_phone" name="has_phone" value="1" <%= "checked" if @contact.has_phone %>>
+              Phone number
+            </label>
+          </div>
+
+          <!-- Label and input for has_email -->
+          <div class="checkbox">
+            <label for="has_email">
+              <input type="checkbox" id="has_email" name="has_email" value="1" <%= "checked" if @contact.has_email %>>
+              Email address
+            </label>
+          </div>
+
+          <% if current_user.moves != nil %>
+
+          <br>
+          <!-- Label and input for has_email -->
+          <div class="checkbox">
+            <label for="exclude">
+              <input type="checkbox" id="exclude" name="exclude" value="1" <%= "checked" if @exclude %>>
+              Exclude this contact from your existing moves?
+            </label>
+          </div>
+          <% end %>
+
+
+
+          <!--<label for=":move" class="control-label">
+            Add to an existing move? (MAYBE DON't NEED THIS, ADD TO A MOVE)
+          </label>
+          <%= select_tag :move, options_from_collection_for_select(Move.all, :id, :name), :class => "form-control",:include_blank => true %>-->
+
+          <p>
+            <button class="btn btn-success">
+              Create Contact
+            </button>
+
+          or
+          <a href="/dashboard">Cancel</a>
+          </p>
+        </form>
       </div>
+    </div>
 
-      <label>This contact has my:</label>
-
-      <!-- Label and input for has_address -->
-      <div class="checkbox">
-        <label for="has_address">
-          <input type="checkbox" id="has_address" name="has_address" value="1" <%= "checked" if @contact.has_address %>>
-          Mailing address
-        </label>
-      </div>
-
-
-      <!-- Label and input for has_phone -->
-      <div class="checkbox">
-        <label for="has_phone">
-          <input type="checkbox" id="has_phone" name="has_phone" value="1" <%= "checked" if @contact.has_phone %>>
-          Phone number
-        </label>
-      </div>
-
-      <!-- Label and input for has_email -->
-      <div class="checkbox">
-        <label for="has_email">
-          <input type="checkbox" id="has_email" name="has_email" value="1" <%= "checked" if @contact.has_email %>>
-          Email address
-        </label>
-      </div>
-
-      <% if current_user.moves != nil %>
-
-<br>
-      <!-- Label and input for has_email -->
-      <div class="checkbox">
-        <label for="exclude">
-          <input type="checkbox" id="exclude" name="exclude" value="1" <%= "checked" if @exclude %>>
-          Exclude this contact from your existing moves?
-        </label>
-      </div>
-      <% end %>
-
-
-
-      <!--<label for=":move" class="control-label">
-          Add to an existing move? (MAYBE DON't NEED THIS, ADD TO A MOVE)
-      </label>
-      <%= select_tag :move, options_from_collection_for_select(Move.all, :id, :name), :class => "form-control",:include_blank => true %>-->
-
-<br>
-      <p>
-      <button class="btn btn-success">
-        Create Contact
-      </button>
-      </p>
-      or
-      <a href="/dashboard">Cancel</a>
-    </form>
   </div>
 </div>

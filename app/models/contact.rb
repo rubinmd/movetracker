@@ -2,7 +2,7 @@ class Contact < ActiveRecord::Base
   has_many :moves, :through => :stale_listings , :source => :moves
   belongs_to :user
   has_many :stale_listings , :class_name => "StaleListing", :foreign_key => "contact_id", dependent: :destroy, foreign_key: :contact_id
-  validates :name, :presence=>true
+  validates :name, :presence=>true, :uniqueness=>{scope: :user_id, message: "You already have a contact with this name"}
 
   validate :move_type
 
