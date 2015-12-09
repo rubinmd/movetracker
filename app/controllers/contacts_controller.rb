@@ -30,7 +30,7 @@ class ContactsController < ApplicationController
 
       else
 
-        Move.all.each do |move|
+        current_user.moves.each do |move|
           if @contact.has_address == true && move.updated_address == true
             sl = StaleListing.new
             sl.out_of_date_address = true
