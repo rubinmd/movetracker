@@ -11,7 +11,7 @@ class DashboardController < ApplicationController
 
     #remove items in my contacts and duplicates
     @all_contacts = Contact.select(:name).distinct
-    @all_contacts = @all_contacts.where.not({:name=>@names_for_exclude}).order("lower(name) ASC")
+    @all_contacts = @all_contacts.where.not({:name=>@names_for_exclude}).order("name ASC")
 
 
     @moves = current_user.moves.order("created_at DESC")
