@@ -34,7 +34,7 @@ class ApplicationController < ActionController::Base
     key=ENV['geo_key']
     url_id="http://api2.yp.com/listings/v1/search?searchloc="+city+"
     &term="+CGI::escape(contact_name)+"&format=json&key="+key+"&sort=name&listingcount=1"
-    raw_data=open(url_id).read
+    raw_data=open(URI.encode(url_id)).read
     parsed_data=JSON.parse(raw_data)
     num_results=parsed_data["searchResult"]["metaProperties"]["listingCount"].to_i
     if num_results > 0
