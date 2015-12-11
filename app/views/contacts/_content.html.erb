@@ -1,0 +1,13 @@
+<div id="enclosure">
+  <% queryString= CGI::escape(@contact.name) %>
+  <% if @num_results > 0 %>
+
+  <p>Does this contact fit into this category: <%= @category %></p>
+  <p>If so, this might be the number for <%= @contact.name %> in <%= @city %>: <%= @number %></p>
+  Number wasn't what you needed? <a target="_blank" href="https://www.google.com/search?q=<%= queryString %>+customer+service">Google it</a>
+  <% else %>
+  <p>Sorry, no contact information was found!</p>
+
+  <a target="_blank" href="https://www.google.com/search?q=<%= queryString %>+customer+service">Google it</a>
+  <% end %>
+</div>

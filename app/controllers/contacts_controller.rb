@@ -1,4 +1,19 @@
 class ContactsController < ApplicationController
+  def snip
+    @contact = Contact.find(params[:id])
+    @geo_info=get_cs_number(@contact.name)
+    @num_results=@geo_info[:num_results]
+    if @num_results>0
+      @city=@geo_info[:city]
+      @number=@geo_info[:number]
+      @category=@geo_info[:category]
+    else
+      @city=nil
+      @number=nil
+      @category=nil
+    end
+    render '_content.html.erb'
+  end
 
   def index
     admin_check
@@ -63,24 +78,10 @@ class ContactsController < ApplicationController
     else
       render 'new'
     end
-
-
   end
 
   def edit
     @contact = Contact.find(params[:id])
-    @geo_info=get_cs_number(@contact.name)
-    @num_results=@geo_info[:num_results]
-    if @num_results>0
-      @city=@geo_info[:city]
-      @number=@geo_info[:number]
-      @category=@geo_info[:category]
-    else
-      @city=nil
-      @number=nil
-      @categoru=nil
-    end
-
   end
 
   def update

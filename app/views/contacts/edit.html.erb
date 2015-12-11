@@ -1,11 +1,11 @@
 <!-- Validation failure messages -->
 <% if @contact.errors.any? %>
-  <% @contact.errors.full_messages.each do |message| %>
-    <div class="alert alert-dismissable alert-danger">
-    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    <%= message %>
-  </div>
-  <% end %>
+<% @contact.errors.full_messages.each do |message| %>
+<div class="alert alert-dismissable alert-danger">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+  <%= message %>
+</div>
+<% end %>
 <% end %>
 
 <div class="row">
@@ -66,51 +66,46 @@
             </label>
           </div>
 
-<p>
-        <button class="btn btn-primary" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-  Looking for contact info?
-</button></p>
-<div class="collapse" id="collapseExample">
-  <div class="well">
-  <% queryString= CGI::escape(@contact.name) %>
-  <% if @num_results > 0 %>
-
-  <p>Does this contact fit into this category: <%= @category %></p>
-    <p>If so, this might be the number for <%= @contact.name %> in <%= @city %>: <%= @number %></p>
-Number wasn't what you needed? <a target="_blank" href="https://www.google.com/search?q=<%= queryString %>+customer+service">Google it</a>
-  <% else %>
-  <p>Sorry, no contact information was found!</p>
-
-  <a target="_blank" href="https://www.google.com/search?q=<%= queryString %>+customer+service">Google it</a>
-  <% end %>
-  </div>
-</div>
-
-
-          <button class="btn btn-warning">
-            Update Contact
-          </button>
-          <a href="/delete_contact/<%= @contact.id %>" class="btn btn-danger">
-            Delete Contact
-          </a>
-          or
-          <a href="/dashboard">Go back</a>
-          <% if Rails.env.development? %>
-          DEV
-          <%end %>
-          <% if Rails.env.production? %>
-          PROD
-          <% end %>
-        </form>
-
-
-
+          <p>
+            <a id="2" class="btn btn-primary" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+              Looking for contact info?
+            </a></p>
+            <div class="collapse" id="collapseExample">
+              <div id="number_info" class="well">
+                <div class="loading">Please wait...</div>
+              </div>
+            </div>
+            <button class="btn btn-warning">
+              Update Contact
+            </button>
+            <a href="/delete_contact/<%= @contact.id %>" class="btn btn-danger">
+              Delete Contact
+            </a>
+            or
+            <a href="/dashboard">Go back</a>
+          </form>
+        </div>
       </div>
-
     </div>
-
   </div>
-</div>
+
+
+
+
+<script>
+$loading = $("#loading");
+
+$(document).on({
+    ajaxStart: function() { $loading.addClass("loading_style");    },
+    ajaxStop: function() { $loading.removeClass("loading_style"); }
+});
+
+$( "#number_info" ).load( "/contacts/<%= @contact.id %>/content #enclosure" );
+
+</script>
+
+
+
 
 
 

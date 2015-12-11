@@ -20,11 +20,9 @@ class ApplicationController < ActionController::Base
     require 'json'
     require 'open-uri'
 
-    ip=request.remote_ip
-    puts "________________________"
-    puts ip
-    puts "________________________"
-    if ip == "::1"
+    if Rails.env.production?
+      ip=request.remote_ip
+    elsif Rails.env.development?
       url_ip="https://api.ipify.org?format=json"
       raw_data_ip=open(url_ip).read
       parsed_data_ip=JSON.parse(raw_data_ip)
