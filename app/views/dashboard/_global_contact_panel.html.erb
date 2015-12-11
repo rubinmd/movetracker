@@ -16,6 +16,14 @@
             <% end %>
             <% @contacts_by_pop.sort!{|x,y| y[:count] <=> x[:count]} %>
 
+            <!--There is a duplicate copy of this in the head of the doc which is where it really belongs, but I found that it sometimes didn't work there without a page refresh and it works reliable here, so I've added it to make sure it works every time-->
+              <script>
+              $(document).ready(function(){
+                $('[data-toggle="tooltip"]').tooltip();
+                $('[data-trigger="hover"]').tooltip();
+                $('[data-container="true"]').tooltip();
+              });
+              </script>
             <!--Creates a counter for the form and element names so that they are unique on each row-->
             <% counter=0 %>
             <% @contacts_by_pop.each do |contact| %>
@@ -45,7 +53,7 @@
                 <td>
 
 
-                  <span  data-toggle="tooltip" title="Quick add an email address">
+                  <span data-toggle="tooltip" title="Quick add an email address">
                   <label for="has_email<%= counter %>"><i class="fa fa-fw fa-at"></i></label>
                   </span>
                   <input name="has_email" id="has_email<%= counter %>" form="form<%= counter %>" type="checkbox">
