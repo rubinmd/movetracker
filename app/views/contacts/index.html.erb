@@ -46,7 +46,7 @@
           <% @contacts.each do |contact| %>
           <tr>
             <td><a href="/contacts/<%= contact.id %>"><%= contact.name %></a></td>
-            <td><%= contact.user.first_name %></td>
+            <td><%= contact.user.id %>, <%= contact.user.first_name %></td>
             <td>
               <%= truncate(contact.notes, :length => 75) %>
             </td>
