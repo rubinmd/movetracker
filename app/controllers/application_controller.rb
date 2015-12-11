@@ -24,6 +24,8 @@ class ApplicationController < ActionController::Base
     raw_data_ip=open(url_ip).read
     parsed_data_ip=JSON.parse(raw_data_ip)
     ip=parsed_data_ip["ip"]
+    #FOR Deploying
+    ip=request.remote_ip
 
     url_location="http://ip-api.com/json/"+ip
     raw_data_location=open(url_location).read
