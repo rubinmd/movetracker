@@ -11,10 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151211003302) do
+ActiveRecord::Schema.define(version: 20151211185958) do
 
   create_table "changes", force: :cascade do |t|
-    t.string   "user_id"
+    t.integer  "user_id"
     t.text     "notes"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 20151211003302) do
   end
 
   create_table "contacts", force: :cascade do |t|
-    t.string   "user_id"
+    t.integer  "user_id"
     t.text     "notes"
     t.boolean  "has_phone"
     t.boolean  "has_email"
@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 20151211003302) do
   end
 
   create_table "moves", force: :cascade do |t|
-    t.string   "user_id"
+    t.integer  "user_id"
     t.text     "notes"
     t.boolean  "updated_phone"
     t.boolean  "updated_email"
@@ -47,8 +47,8 @@ ActiveRecord::Schema.define(version: 20151211003302) do
   end
 
   create_table "notes", force: :cascade do |t|
-    t.string   "user_id"
-    t.string   "contact_id"
+    t.integer  "user_id"
+    t.integer  "contact_id"
     t.text     "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -58,10 +58,10 @@ ActiveRecord::Schema.define(version: 20151211003302) do
     t.boolean  "out_of_date_address"
     t.boolean  "out_of_date_email"
     t.boolean  "out_of_date_phone"
-    t.string   "contact_id"
+    t.integer  "contact_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "move_id"
+    t.integer  "move_id"
   end
 
   create_table "users", force: :cascade do |t|
