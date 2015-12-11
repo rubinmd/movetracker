@@ -1,5 +1,6 @@
 class MovesController < ApplicationController
   def index
+    admin_check
     @moves = current_user.moves
   end
 

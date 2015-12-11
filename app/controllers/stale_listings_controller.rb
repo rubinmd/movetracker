@@ -1,17 +1,21 @@
 class StaleListingsController < ApplicationController
   def index
+    admin_check
     @stale_listings = StaleListing.all
   end
 
   def show
+    admin_check
     @stale_listing = StaleListing.find(params[:id])
   end
 
   def new
+    admin_check
     @stale_listing = StaleListing.new
   end
 
   def create
+    admin_check
     @stale_listing = StaleListing.new
     @stale_listing.out_of_date_address = params[:out_of_date_address]
     @stale_listing.out_of_date_email = params[:out_of_date_email]
@@ -27,10 +31,12 @@ class StaleListingsController < ApplicationController
   end
 
   def edit
+    admin_check
     @stale_listing = StaleListing.find(params[:id])
   end
 
   def update
+
     @stale_listing = StaleListing.find(params[:id])
 
     @stale_listing.out_of_date_address = params[:out_of_date_address]
@@ -47,6 +53,7 @@ class StaleListingsController < ApplicationController
   end
 
   def destroy
+
     @stale_listing = StaleListing.find(params[:id])
 
     @stale_listing.destroy

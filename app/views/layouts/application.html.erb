@@ -51,12 +51,16 @@
 
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <% if current_user!=nil && current_user.admin? %>
         <ul class="nav navbar-nav">
           <li><a href="/contacts">Contacts</a></li>
           <li><a href="/moves">Moves</a></li>
           <li><a href="/stale_listings">Stale Listings</a></li>
+          <li><a href="/users">Users</a></li>
           <li><a href="/dashboard">Dashboard</a></li>
         </ul>
+      <% end %>
+
 
         <ul class="nav navbar-nav navbar-right">
           <% if current_user == nil %>

@@ -48,5 +48,13 @@ class ApplicationController < ActionController::Base
     return results
   end
 
+  def admin_check
+    if current_user.admin?
+      return
+    else
+      redirect_to "/dashboard"
+    end
+  end
+
 
 end

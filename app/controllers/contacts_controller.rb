@@ -1,14 +1,16 @@
 class ContactsController < ApplicationController
+
   def index
+    admin_check
     @contacts = Contact.all
   end
 
   def show
+    admin_check
     @contact = Contact.find(params[:id])
     @geo_info=get_cs_number(@contact.name)
     @city=@geo_info[:city]
     @number=@geo_info[:number]
-
   end
 
   def new
@@ -133,10 +135,7 @@ class ContactsController < ApplicationController
       if @previously_had_address==true && @contact.has_address == nil && listing.out_of_date_address == true
         listing.destroy
       end
-
     end
-
-
       redirect_to "/dashboard", :notice => "Contact updated successfully."
     else
       render 'edit'
@@ -145,9 +144,8 @@ class ContactsController < ApplicationController
 
   def destroy
     @contact = Contact.find(params[:id])
-
     @contact.destroy
-
     redirect_to "/dashboard", :notice => "Contact deleted."
   end
+
 end

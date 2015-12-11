@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151125014528) do
+ActiveRecord::Schema.define(version: 20151211003302) do
 
   create_table "changes", force: :cascade do |t|
     t.string   "user_id"
@@ -46,6 +46,14 @@ ActiveRecord::Schema.define(version: 20151125014528) do
     t.datetime "updated_at"
   end
 
+  create_table "notes", force: :cascade do |t|
+    t.string   "user_id"
+    t.string   "contact_id"
+    t.text     "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "stale_listings", force: :cascade do |t|
     t.boolean  "out_of_date_address"
     t.boolean  "out_of_date_email"
@@ -71,6 +79,7 @@ ActiveRecord::Schema.define(version: 20151125014528) do
     t.string   "last_name"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.boolean  "admin"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
