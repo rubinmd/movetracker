@@ -95,6 +95,12 @@ Number wasn't what you needed? <a target="_blank" href="https://www.google.com/s
           </a>
           or
           <a href="/dashboard">Go back</a>
+          <% if Rails.env.development? %>
+          DEV
+          <%end %>
+          <% if Rails.env.product? %>
+          PROD
+          <% end %>
         </form>
 
 
