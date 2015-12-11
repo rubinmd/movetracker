@@ -20,12 +20,17 @@ class ApplicationController < ActionController::Base
     require 'json'
     require 'open-uri'
 
-    url_ip="https://api.ipify.org?format=json"
-    raw_data_ip=open(url_ip).read
-    parsed_data_ip=JSON.parse(raw_data_ip)
-    ip=parsed_data_ip["ip"]
-    #FOR Deploying
     ip=request.remote_ip
+    puts "________________________"
+    puts ip
+    puts "________________________"
+    if ip == "::1"
+      url_ip="https://api.ipify.org?format=json"
+      raw_data_ip=open(url_ip).read
+      parsed_data_ip=JSON.parse(raw_data_ip)
+      ip=parsed_data_ip["ip"]
+    end
+
 
     url_location="http://ip-api.com/json/"+ip
     raw_data_location=open(url_location).read
