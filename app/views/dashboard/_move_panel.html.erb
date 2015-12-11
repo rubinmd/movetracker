@@ -20,13 +20,13 @@
     <a class="list-group-item" href="moves/<%= move.id %>"><%= move.name %>
       <span class="badge"><%= move.contacts.count %></span>
       <small> -
-        <% if move.updated_address ==true %>
+        <% if move.updated_address ==1 %>
         <% contact_methods.push("address")  %>
         <% end %>
-        <% if move.updated_phone ==true%>
+        <% if move.updated_phone ==1%>
         <% contact_methods.push("phone")  %>
         <% end %>
-        <% if move.updated_email ==true%>
+        <% if move.updated_email ==1%>
         <% contact_methods.push("email")  %>
         <% end %>
         <%= contact_methods.to_sentence.capitalize %>
