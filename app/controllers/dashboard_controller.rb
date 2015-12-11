@@ -1,7 +1,7 @@
 class DashboardController < ApplicationController
   def index
 
-    @my_contacts = current_user.contacts.order("name ASC")
+    @my_contacts = current_user.contacts.order("lower(name) ASC")
 
     #Create global contact collection
     @names_for_exclude=[]
@@ -11,7 +11,7 @@ class DashboardController < ApplicationController
 
     #remove items in my contacts and duplicates
     @all_contacts = Contact.select(:name).distinct
-    @all_contacts = @all_contacts.where.not({:name=>@names_for_exclude}).order("name ASC")
+    @all_contacts = @all_contacts.where.not({:name=>@names_for_exclude}).order("lower(name) ASC")
 
 
     @moves = current_user.moves.order("created_at DESC")
