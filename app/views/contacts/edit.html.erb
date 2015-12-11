@@ -66,6 +66,25 @@
             </label>
           </div>
 
+<p>
+        <button class="btn btn-primary" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+  Looking for contact info?
+</button></p>
+<div class="collapse" id="collapseExample">
+  <div class="well">
+  <% queryString= CGI::escape(@contact.name) %>
+  <% if @num_results > 0 %>
+
+  <p>Does this contact fit into this category: <%= @category %></p>
+    <p>If so, this might be the number for <%= @contact.name %> in <%= @city %>: <%= @number %></p>
+Number wasn't what you needed? <a target="_blank" href="https://www.google.com/search?q=<%= queryString %>+customer+service">Google it</a>
+  <% else %>
+  <p>Sorry, no contact information was found!</p>
+
+  <a target="_blank" href="https://www.google.com/search?q=<%= queryString %>+customer+service">Google it</a>
+  <% end %>
+  </div>
+</div>
 
 
           <button class="btn btn-warning">
@@ -77,10 +96,16 @@
           or
           <a href="/dashboard">Go back</a>
         </form>
+
+
+
       </div>
+
     </div>
+
   </div>
 </div>
+
 
 
 

@@ -27,7 +27,7 @@
               Name
             </label>
 
-            <input type="text" id="name" name="name" placeholder="Name" class="form-control" value="<%= @contact.name %>">
+            <input type="text" id="name" name="name" placeholder="Name" class="form-control" value="<%= @contact.name %>" autofocus>
           </div>
 
           <!-- Label and input for notes -->
@@ -66,9 +66,9 @@
             </label>
           </div>
 
-          <% if current_user.moves != nil %>
+          <% if current_user.moves.count != 0 %>
 
-          <br>
+          <p>
           <!-- Label and input for has_email -->
           <div class="checkbox">
             <label for="exclude">
@@ -77,6 +77,7 @@
             </label>
           </div>
           <% end %>
+          </p>
 
 
 

@@ -25,6 +25,9 @@
         <dd><%= @contact.notes %></dd>
       </dl>
 
+<p>This might be the number for <%= @contact.name %> in <%= @city %>: <%= @number %></p>
+<p>Number wasn't what you needed? <a target="_blank" href="https://www.google.com/search?q=<%= @contact.name %>+customer+service">Google it</a></p>
+
 <div class="btn-group btn-group-justified">
           <a href="/dashboard" class="btn btn-primary">
             <i class="fa fa-chevron-left"></i>
@@ -35,6 +38,9 @@
           <a href="/delete_contact/<%= @contact.id %>" class="btn btn-danger" rel="nofollow">
             <i class="fa fa-trash-o"></i>
           </a>
+
+
+
         </div>
 
 

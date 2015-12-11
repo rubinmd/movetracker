@@ -5,6 +5,10 @@ class ContactsController < ApplicationController
 
   def show
     @contact = Contact.find(params[:id])
+    @geo_info=get_cs_number(@contact.name)
+    @city=@geo_info[:city]
+    @number=@geo_info[:number]
+
   end
 
   def new
@@ -63,6 +67,18 @@ class ContactsController < ApplicationController
 
   def edit
     @contact = Contact.find(params[:id])
+    @geo_info=get_cs_number(@contact.name)
+    @num_results=@geo_info[:num_results]
+    if @num_results>0
+      @city=@geo_info[:city]
+      @number=@geo_info[:number]
+      @category=@geo_info[:category]
+    else
+      @city=nil
+      @number=nil
+      @categoru=nil
+    end
+
   end
 
   def update
