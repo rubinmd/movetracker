@@ -46,7 +46,7 @@ class ContactsController < ApplicationController
       redirect_to "/dashboard", :notice => "Contact created successfully."
 
 
-      if @exclude == "0"
+      if @exclude == nil
         current_user.moves.each do |move|
           if @contact.has_address == true && move.updated_address == true
             sl = StaleListing.new
