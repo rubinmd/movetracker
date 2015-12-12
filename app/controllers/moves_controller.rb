@@ -1,7 +1,7 @@
 class MovesController < ApplicationController
   def index
     admin_check
-    @moves = current_user.moves
+    @moves = Move.all
   end
 
   def show
@@ -16,7 +16,6 @@ class MovesController < ApplicationController
     if @move.updated_email==true
       @move_number=@move_number+1
     end
-
   end
 
   def new
@@ -120,7 +119,6 @@ class MovesController < ApplicationController
         end
       end
 
-
       redirect_to "/moves/"+@move.id.to_s, :notice => "Move updated successfully."
     else
       render 'edit'
@@ -129,9 +127,7 @@ class MovesController < ApplicationController
 
   def destroy
     @move = Move.find(params[:id])
-
     @move.destroy
-
     redirect_to "/dashboard", :notice => "Move deleted."
   end
 end

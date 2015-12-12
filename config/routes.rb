@@ -57,7 +57,7 @@ Rails.application.routes.draw do
 
   # READ
   get "/contacts", :controller => "contacts", :action => "index"
-  get "/contacts/:id/content", :controller => "contacts", :action => "snip"
+  get "/contacts/:id/number", :controller => "contacts", :action => "snip"
   get "/contacts/:id", :controller => "contacts", :action => "show"
 
   # UPDATE
@@ -73,7 +73,6 @@ Rails.application.routes.draw do
   # User View
   get "/users", :controller => "users", :action => "index"
   post "/update_user/:id", :controller => "users", :action => "update"
-
 
   #Devise
   devise_for :users

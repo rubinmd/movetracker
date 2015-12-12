@@ -1,6 +1,6 @@
 <div class="page-header">
   <h1>
-    Your moves
+    Moves
     <a href="/moves/new" class="btn btn-md btn-success">Add</a>
   </h1>
 </div>
@@ -14,7 +14,6 @@
         <th class="text-center">New phone</th>
         <th class="text-center">New email</th>
         <th class="text-center">New address</th>
-
         <th class="text-center">Actions</th>
       </tr>
 
@@ -23,19 +22,19 @@
         <td><a href="/moves/<%= move.id %>"><%= move.name %></a></td>
         <td><%= truncate(move.notes, :length => 50) %></td>
         <td class="text-center">
-        <% if move.updated_phone == true %>
+          <% if move.updated_phone == true %>
           <font color="green"><i class="fa fa-check"></i></font>
-        <% end %>
+          <% end %>
         </td>
         <td class="text-center">
-        <% if move.updated_email == true %>
+          <% if move.updated_email == true %>
           <font color="green"><i class="fa fa-check"></i></font>
-        <% end %>
+          <% end %>
         </td>
         <td class="text-center">
-        <% if move.updated_address == true %>
+          <% if move.updated_address == true %>
           <font color="green"><i class="fa fa-check"></i></font>
-        <% end %>
+          <% end %>
         </td>
 
         <td class="text-center">

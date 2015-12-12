@@ -1,79 +1,74 @@
 
-        <div class="panel panel-default">
-          <!-- Default panel contents -->
-          <div class="panel-heading">Popular Contacts </div>
-          <div class="panel-body">
-            <p>These are popular contacts from other users. Feel free to browse and add them to your personal contact list</p>
-          </div>
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">Popular Contacts </div>
+  <div class="panel-body">
+    <p>These are popular contacts from other users. Feel free to browse and add them to your personal contact list</p>
+  </div>
 
-          <!-- rows -->
-          <table class="table table-hover scrollable-panel">
+  <!-- rows -->
+  <table class="table table-hover scrollable-panel">
 
-            <!-- Creates an array containing hashes for each contact for the list,linking it to the number of other users with that same contact. The array is then sorted so that the most popular contacts are first-->
-            <% @contacts_by_pop = [] %>
-            <% @all_contacts.each do |contact| %>
-            <% @contacts_by_pop << {:contact => contact.name, :count => Contact.where({:name=>contact.name}).count} %>
+    <!-- Creates an array containing hashes for each contact for the list,linking it to the number of other users with that same contact. The array is then sorted so that the most popular contacts are first-->
+    <% @contacts_by_pop = [] %>
+    <% @all_contacts.each do |contact| %>
+    <% @contacts_by_pop << {:contact => contact.name, :count => Contact.where({:name=>contact.name}).count} %>
+    <% end %>
+    <% @contacts_by_pop.sort!{|x,y| y[:count] <=> x[:count]} %>
+
+    <!--There is a duplicate copy of this in the head of the doc which is where it really belongs, but I found that it sometimes didn't work there without a page refresh and it works reliable here, so I've added it to make sure it works every time-->
+    <script>
+      $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip();
+        $('[data-trigger="hover"]').tooltip();
+        $('[data-container="true"]').tooltip();
+      });
+    </script>
+    <!--Creates a counter for the form and element names so that they are unique on each row-->
+    <% counter=0 %>
+    <% @contacts_by_pop.each do |contact| %>
+
+    <form action="/create_contact" method="post" id="form<%= counter %>">
+      <tr>
+
+        <input form="form<%= counter %>" name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+        <input form="form<%= counter %>" name="name" type="hidden" value="<%= contact[:contact] %>">
+        <input form="form<%= counter %>" name="user_id" type="hidden" value="<%= current_user.id %>">
+        <td width="1%">
+          <button form="form<%= counter %>" class="badge list-group-item-success pull-left btn btn-link">
+            <i class="fa fa-plus"></i>
+          </button>
+        </td>
+        <td>
+          <%= contact[:contact] %> -
+          <small class="text-muted">
+            <% plural="users" %>
+            <% if Contact.where({:name=>contact[:contact]}).count == 1%>
+            <% plural="user" %>
             <% end %>
-            <% @contacts_by_pop.sort!{|x,y| y[:count] <=> x[:count]} %>
 
-            <!--There is a duplicate copy of this in the head of the doc which is where it really belongs, but I found that it sometimes didn't work there without a page refresh and it works reliable here, so I've added it to make sure it works every time-->
-              <script>
-              $(document).ready(function(){
-                $('[data-toggle="tooltip"]').tooltip();
-                $('[data-trigger="hover"]').tooltip();
-                $('[data-container="true"]').tooltip();
-              });
-              </script>
-            <!--Creates a counter for the form and element names so that they are unique on each row-->
-            <% counter=0 %>
-            <% @contacts_by_pop.each do |contact| %>
+            (<%= Contact.where({:name=>contact[:contact]}).count %> other <%= plural %>)
+          </small>
+        </td>
+        <td>
 
-            <form action="/create_contact" method="post" id="form<%= counter %>">
-              <tr>
+          <span data-toggle="tooltip" title="Quick add an email address">
+            <label for="has_email<%= counter %>"><i class="fa fa-fw fa-at"></i></label>
+          </span>
+          <input name="has_email" id="has_email<%= counter %>" form="form<%= counter %>" type="checkbox">
 
-                <input form="form<%= counter %>" name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
-                <input form="form<%= counter %>" name="name" type="hidden" value="<%= contact[:contact] %>">
-                <input form="form<%= counter %>" name="user_id" type="hidden" value="<%= current_user.id %>">
-                <td width="1%">
-                  <button form="form<%= counter %>" class="badge list-group-item-success pull-left btn btn-link">
-                    <i class="fa fa-plus"></i>
-                  </button>
-                </td>
-                <td>
-                  <%= contact[:contact] %> -
-                  <small class="text-muted">
-                    <% plural="users" %>
-                    <% if Contact.where({:name=>contact[:contact]}).count == 1%>
-                    <% plural="user" %>
-                    <% end %>
+          <span  data-toggle="tooltip" title="Quick add a phone number">
+            <label for="has_phone<%= counter %>"><i class="fa fa-fw fa-hashtag"></i></label>
+          </span>
+          <input name="has_phone" id="has_phone<%= counter %>" form="form<%= counter %>" type="checkbox">
 
-                    (<%= Contact.where({:name=>contact[:contact]}).count %> other <%= plural %>)
-                  </small>
-                </td>
-                <td>
-
-
-                  <span data-toggle="tooltip" title="Quick add an email address">
-                  <label for="has_email<%= counter %>"><i class="fa fa-fw fa-at"></i></label>
-                  </span>
-                  <input name="has_email" id="has_email<%= counter %>" form="form<%= counter %>" type="checkbox">
-
-
-                  <span  data-toggle="tooltip" title="Quick add a phone number">
-                  <label for="has_phone<%= counter %>"><i class="fa fa-fw fa-hashtag"></i></label>
-                  </span>
-                  <input name="has_phone" id="has_phone<%= counter %>" form="form<%= counter %>" type="checkbox">
-
-
-                  <span  data-toggle="tooltip" title="Quick add a physical address">
-                  <label for="has_address<%= counter %>"><i class="fa fa-fw fa-home"></i></label>
-                  </span>
-                  <input name="has_address" id="has_address<%= counter %>" form="form<%= counter %>" type="checkbox">
-
-
-                </td>
-              </form>
-            </tr>
-            <% counter=counter+1 %>
-            <% end %>
-          </table>
+          <span  data-toggle="tooltip" title="Quick add a physical address">
+            <label for="has_address<%= counter %>"><i class="fa fa-fw fa-home"></i></label>
+          </span>
+          <input name="has_address" id="has_address<%= counter %>" form="form<%= counter %>" type="checkbox">
+        </td>
+      </form>
+    </tr>
+    <% counter=counter+1 %>
+    <% end %>
+  </table>

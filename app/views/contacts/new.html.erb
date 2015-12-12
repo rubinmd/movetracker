@@ -69,30 +69,21 @@
           <% if current_user.moves.count != 0 %>
 
           <p>
-          <!-- Label and input for has_email -->
-          <div class="checkbox">
-            <label for="exclude">
-              <input type="checkbox" id="exclude" name="exclude" value="1" <%= "checked" if @exclude %>>
-              Exclude this contact from your existing moves?
-            </label>
-          </div>
-          <% end %>
+            <!-- Label and input for has_email -->
+            <div class="checkbox">
+              <label for="exclude">
+                <input type="checkbox" id="exclude" name="exclude" value="1" <%= "checked" if @exclude %>>
+                Exclude this contact from your existing moves?
+              </label>
+            </div>
+            <% end %>
           </p>
-
-
-
-          <!--<label for=":move" class="control-label">
-            Add to an existing move? (MAYBE DON't NEED THIS, ADD TO A MOVE)
-          </label>
-          <%= select_tag :move, options_from_collection_for_select(Move.all, :id, :name), :class => "form-control",:include_blank => true %>-->
-
           <p>
             <button class="btn btn-success">
               Create Contact
             </button>
-
-          or
-          <a href="/dashboard">Cancel</a>
+            or
+            <a href="/dashboard">Cancel</a>
           </p>
         </form>
       </div>

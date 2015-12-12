@@ -5,10 +5,9 @@
         <h3 class="panel-title"><%= @contact.name %></h3>
       </div>
       <div class="panel-body">
-      <dl class="dl-horizontal">
-      <dt>This contact has your:</dt>
-      <dd>
-
+        <dl class="dl-horizontal">
+          <dt>This contact has your:</dt>
+          <dd>
             <% @contact_methods=[] %>
             <% if @contact.has_phone == true%>
             <% @contact_methods.push("phone") %>
@@ -20,15 +19,15 @@
             <% @contact_methods.push("address") %>
             <% end %>
             <%= @contact_methods.to_sentence.capitalize %>
-            </dd>
-        <dt>Notes:</dt>
-        <dd><%= @contact.notes %></dd>
-      </dl>
+          </dd>
+          <dt>Notes:</dt>
+          <dd><%= @contact.notes %></dd>
+        </dl>
 
-<p>This might be the number for <%= @contact.name %> in <%= @city %>: <%= @number %></p>
-<p>Number wasn't what you needed? <a target="_blank" href="https://www.google.com/search?q=<%= @contact.name %>+customer+service">Google it</a></p>
+        <p>This might be the number for <%= @contact.name %> in <%= @city %>: <%= @number %></p>
+        <p>Number wasn't what you needed? <a target="_blank" href="https://www.google.com/search?q=<%= @contact.name %>+customer+service">Google it</a></p>
 
-<div class="btn-group btn-group-justified">
+        <div class="btn-group btn-group-justified">
           <a href="/dashboard" class="btn btn-primary">
             <i class="fa fa-chevron-left"></i>
           </a>
@@ -38,22 +37,8 @@
           <a href="/delete_contact/<%= @contact.id %>" class="btn btn-danger" rel="nofollow">
             <i class="fa fa-trash-o"></i>
           </a>
-
-
-
         </div>
-
-
       </div>
     </div>
   </div>
 </div>
-
-
-
-
-
-
-
-
-

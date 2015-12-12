@@ -13,7 +13,6 @@ class DashboardController < ApplicationController
     @all_contacts = Contact.select(:name).distinct
     @all_contacts = @all_contacts.where.not({:name=>@names_for_exclude}).order("name ASC")
 
-
     @moves = current_user.moves.order("created_at DESC")
 
   end

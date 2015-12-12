@@ -14,4 +14,5 @@ class UsersController < ApplicationController
       redirect_to :back, :notice => "User not updated."
     end
   end
+
 end

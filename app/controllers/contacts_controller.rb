@@ -12,7 +12,7 @@ class ContactsController < ApplicationController
       @number=nil
       @category=nil
     end
-    render '_content.html.erb'
+    render '_number.html.erb'
   end
 
   def index
@@ -46,11 +46,7 @@ class ContactsController < ApplicationController
       redirect_to "/dashboard", :notice => "Contact created successfully."
 
 
-      if @exclude == "1"
-        puts "huh?"
-
-      else
-
+      if @exclude == "0"
         current_user.moves.each do |move|
           if @contact.has_address == true && move.updated_address == true
             sl = StaleListing.new
@@ -75,6 +71,7 @@ class ContactsController < ApplicationController
           end
         end
       end
+
     else
       render 'new'
     end

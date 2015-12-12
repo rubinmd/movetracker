@@ -11,21 +11,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151211185958) do
-
-  create_table "changes", force: :cascade do |t|
-    t.integer  "user_id"
-    t.text     "notes"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "name"
-    t.boolean  "new_email"
-    t.boolean  "new_phone"
-    t.boolean  "new_address"
-  end
+ActiveRecord::Schema.define(version: 20151212003947) do
 
   create_table "contacts", force: :cascade do |t|
-    t.integer  "user_id"
     t.text     "notes"
     t.boolean  "has_phone"
     t.boolean  "has_email"
@@ -33,10 +21,10 @@ ActiveRecord::Schema.define(version: 20151211185958) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "name"
+    t.integer  "user_id"
   end
 
   create_table "moves", force: :cascade do |t|
-    t.integer  "user_id"
     t.text     "notes"
     t.boolean  "updated_phone"
     t.boolean  "updated_email"
@@ -44,23 +32,16 @@ ActiveRecord::Schema.define(version: 20151211185958) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "notes", force: :cascade do |t|
     t.integer  "user_id"
-    t.integer  "contact_id"
-    t.text     "content"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "stale_listings", force: :cascade do |t|
     t.boolean  "out_of_date_address"
     t.boolean  "out_of_date_email"
     t.boolean  "out_of_date_phone"
-    t.integer  "contact_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "contact_id"
     t.integer  "move_id"
   end
 
